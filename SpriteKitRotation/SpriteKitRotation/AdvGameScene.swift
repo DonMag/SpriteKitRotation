@@ -103,10 +103,10 @@ class AdvGameScene: SKScene {
 		
 		// create the "path to follow"
 		if sz.width > sz.height {
-			let startIdx: Int = ellipsePortrait.closestIndexByAngle(to: curPos) ?? 0
+			let startIdx: Int = ellipsePortrait.closestIndex(to: curPos) ?? 0
 			trainPath = ellipseLandscape.generatePath(startingAt: startIdx).reversing()
 		} else {
-			let startIdx: Int = ellipseLandscape.closestIndexByAngle(to: curPos) ?? 0
+			let startIdx: Int = ellipseLandscape.closestIndex(to: curPos) ?? 0
 			trainPath = ellipsePortrait.generatePath(startingAt: startIdx).reversing()
 		}
 		

@@ -37,17 +37,6 @@ class MyEllipse: NSObject {
 		
 	}
 	
-	public func closestIndexByAngle(to targetPoint: CGPoint) -> Int? {
-		guard !thePoints.isEmpty else {
-			return nil // Return nil if the array is empty
-		}
-		let d1 = angleBetweenPoints(_center, targetPoint) * (180.0 / .pi)
-		let d2 = d1 < 0.0 ? d1 + 360.0 : d1
-		let steps: Int = 360 / thePoints.count
-		let idx: Int = Int(d2) / steps
-		return idx
-	}
-	
 	public func closestIndex(to targetPoint: CGPoint) -> Int? {
 		guard !thePoints.isEmpty else {
 			return nil // Return nil if the array is empty
@@ -128,14 +117,6 @@ class MyEllipse: NSObject {
 		let deltaX = point2.x - point1.x
 		let deltaY = point2.y - point1.y
 		return deltaX * deltaX + deltaY * deltaY
-	}
-	
-
-	private func angleBetweenPoints(_ point1: CGPoint, _ point2: CGPoint) -> CGFloat {
-		let deltaX = point2.x - point1.x
-		let deltaY = point2.y - point1.y
-		let angle = atan2(deltaY, deltaX)
-		return angle
 	}
 	
 }

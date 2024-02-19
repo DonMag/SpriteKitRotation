@@ -95,8 +95,6 @@ class AdvGameScene: SKScene {
 		// self.view is optional, so safely unwrap
 		guard let thisSKView = self.view else { return }
 		
-		let sT = CFAbsoluteTimeGetCurrent()
-		
 		let curPos = myTrain.position
 		
 		let sz = thisSKView.frame.size
@@ -112,9 +110,6 @@ class AdvGameScene: SKScene {
 		
 		// update the visible oval
 		spOval.path = trainPath.cgPath
-		
-		let eT = CFAbsoluteTimeGetCurrent()
-		print(eT - sT)
 	}
 	
 	func startAnim() {

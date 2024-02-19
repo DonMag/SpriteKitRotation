@@ -15,11 +15,15 @@ class MyEllipse: NSObject {
 	//	to use with "find closest index to point"
 	private var _center: CGPoint = .zero
 	
+	// MARK: public funcs
+	
+	// initializes the array of points in rect
 	public func generatePoints(in rect: CGRect, numberOfPoints: Int) {
 		_center = .init(x: rect.midX, y: rect.midY)
 		generatePoints(center: _center, a: rect.width * 0.5, b: rect.height * 0.5, numberOfPoints: numberOfPoints)
 	}
 	
+	// generates a new path, starting at an index into the array of points
 	public func generatePath(startingAt: Int) -> UIBezierPath {
 		
 		let idx = startingAt < thePoints.count ? startingAt : 0
@@ -37,6 +41,7 @@ class MyEllipse: NSObject {
 		
 	}
 	
+	// get the index of the closest point in the array
 	public func closestIndex(to targetPoint: CGPoint) -> Int? {
 		guard !thePoints.isEmpty else {
 			return nil // Return nil if the array is empty
@@ -45,11 +50,18 @@ class MyEllipse: NSObject {
 		return thePoints.firstIndex(of: pt) ?? 0
 	}
 	
+	// MARK: private funcs
+	
 	private func closestPoint(to targetPoint: CGPoint) -> CGPoint? {
 		guard !thePoints.isEmpty else {
 			return nil // Return nil if the array is empty
 		}
 		
+		// since we're using an array of points forming an ellipse,
+		//	we can start searching at 0, 90, 180, or 270 degrees, and
+		//	stop when we've found it
+		// this will be *slightly* quicker than "brute-force" looping
+		//	through the entire array
 		var p: Double = 0.0
 		if targetPoint.x > _center.x {
 			if targetPoint.y > _center.y {
@@ -90,7 +102,6 @@ class MyEllipse: NSObject {
 	}
 	private func pointsOnEllipse(center: CGPoint, a: CGFloat, b: CGFloat, numberOfPoints: Int) -> [CGPoint] {
 		var ellipsePoints: [CGPoint] = []
-		
 		for i in 0..<numberOfPoints {
 			let theta = CGFloat(2 * Double.pi * Double(i) / Double(numberOfPoints))
 			let x = center.x + a * cos(theta)
@@ -98,7 +109,6 @@ class MyEllipse: NSObject {
 			let point = CGPoint(x: x, y: y)
 			ellipsePoints.append(point)
 		}
-		
 		return ellipsePoints
 	}
 	
@@ -111,8 +121,9 @@ class MyEllipse: NSObject {
 	}
 	
 	// returns the *squared* distance between points
-	//	use this if we don't care about the *actual* distance
-	// this will be faster because we're not calling sqrt()
+	//	we can use this because we don't care about the *actual* distance...
+	//	we only want to compare greater-than or less-than
+	// faster than distanceBetween() above because we're not calling sqrt()
 	private func quickDistanceBetween(_ point1: CGPoint, _ point2: CGPoint) -> CGFloat {
 		let deltaX = point2.x - point1.x
 		let deltaY = point2.y - point1.y

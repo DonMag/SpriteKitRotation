@@ -11,19 +11,22 @@ import GameplayKit
 
 class GameViewController: UIViewController {
 	
-	var scene: GameScene!
-	
+	var scene: SKScene!
+
 	override func viewDidLoad() {
 		super.viewDidLoad()
 		
-		scene = GameScene(size: view.frame.size)
+		//scene = GameScene(size: view.frame.size)
+
+		scene = AdvGameScene(size: view.frame.size)
+
 		scene.scaleMode = .resizeFill
 		if let skView = view as? SKView {
 			skView.presentScene(scene)
 		}
-		
+
 	}
-	
+
 	override var supportedInterfaceOrientations: UIInterfaceOrientationMask {
 		return .all
 	}

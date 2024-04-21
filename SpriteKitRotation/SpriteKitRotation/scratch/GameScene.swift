@@ -8,7 +8,7 @@
 import SpriteKit
 import GameplayKit
 
-class GameScene: SKScene {
+class GameScene: SKScene, SKSceneDelegate {
 	
 	var spOval: SKShapeNode!
 	var myTrain: SKSpriteNode!
@@ -18,6 +18,8 @@ class GameScene: SKScene {
 	var currentSize: CGSize = .zero
 	
 	override func didMove(to view: SKView) {
+		
+		self.delegate = self
 		
 		// ellipse frame will be set in updateFraming
 		spOval = SKShapeNode(ellipseIn: .zero)
@@ -34,6 +36,8 @@ class GameScene: SKScene {
 	}
 	
 	override func didChangeSize(_ oldSize: CGSize) {
+		super.didChangeSize(oldSize)
+		
 		if let v = self.view {
 			// this can be called multiple times on device rotation,
 			//	so we only want to update the framing and animation
@@ -88,7 +92,18 @@ class GameScene: SKScene {
 		
 	}
 	
-	override func update(_ currentTime: TimeInterval) {
-		// Called before each frame is rendered
+	override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
+		myTrain.isPaused.toggle()
 	}
+	
+//	override func update(_ currentTime: TimeInterval) {
+//		// Called before each frame is rendered
+//		print(#function, myTrain.position)
+//	}
+//	func update(_ currentTime: TimeInterval, for scene: SKScene) {
+//		print(#function, myTrain.position)
+//		if let a = myTrain.action(forKey: "myKey") {
+//			print(a.speed)
+//		}
+//	}
 }

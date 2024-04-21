@@ -10,6 +10,34 @@ import UIKit
 import SpriteKit
 import GameplayKit
 
+extension UIImage {
+	
+	func rotated(byDegrees degrees: CGFloat) -> UIImage? {
+		let renderer = UIGraphicsImageRenderer(size: size)
+		return renderer.image { context in
+			// Translate and rotate the context
+			context.cgContext.translateBy(x: size.width / 2, y: size.height / 2)
+			context.cgContext.rotate(by: degrees * .pi / 180.0)
+			
+			// Draw the image into the context
+			draw(in: CGRect(x: -size.width / 2, y: -size.height / 2, width: size.width, height: size.height))
+		}
+	}
+
+	func horizontallyMirrored() -> UIImage? {
+		let renderer = UIGraphicsImageRenderer(size: size)
+		return renderer.image { context in
+			// Flip the context horizontally
+			context.cgContext.translateBy(x: size.width, y: 0)
+			context.cgContext.scaleBy(x: -1, y: 1)
+			
+			// Draw the image into the context
+			draw(in: CGRect(origin: .zero, size: size))
+		}
+	}
+
+}
+
 class AdvGameScene: SKScene {
 
 	var ellipsePortrait: MyEllipse = MyEllipse()
@@ -22,15 +50,35 @@ class AdvGameScene: SKScene {
 	
 	var currentSize: CGSize = .zero
 	
+	var txRight: SKTexture!
+	var txLeft: SKTexture!
+	
 	override func didMove(to view: SKView) {
 		
+		guard let imgR = UIImage(named: "train2")
+		else {
+			fatalError("Could not load train image!")
+		}
+
+		guard let imgRight = imgR.rotated(byDegrees: -90.0),
+			  let imgLeft = imgRight.horizontallyMirrored()
+		else {
+			fatalError("Could not rotate train image!")
+		}
+		
+		txRight = SKTexture(image: imgRight)
+		txLeft = SKTexture(image: imgLeft)
+
 		// ellipse frame will be set in updateFraming
 		spOval = SKShapeNode(ellipseIn: .zero)
 		spOval.lineWidth = 5
 		spOval.strokeColor = .lightGray
 		addChild(spOval)
 		
-		myTrain = SKSpriteNode(imageNamed: "arrow2")
+		//myTrain = SKSpriteNode(imageNamed: "arrow2")
+		//myTrain = SKSpriteNode(imageNamed: "train1")
+		myTrain = SKSpriteNode(texture: txRight)
+		
 		addChild(myTrain)
 		
 		// setup "portrait" and "landscape" ellipses
@@ -79,6 +127,10 @@ class AdvGameScene: SKScene {
 	}
 	
 	override func didChangeSize(_ oldSize: CGSize) {
+		super.didChangeSize(oldSize)
+		if let v = self.view {
+			print("old:", oldSize, "cur:", v.frame.size)
+		}
 		if let v = self.view {
 			// this can be called multiple times on device rotation,
 			//	so we only want to update the framing and animation
@@ -118,13 +170,36 @@ class AdvGameScene: SKScene {
 			trainPath.cgPath,
 			asOffset: false,
 			orientToPath: true,
-			speed: 200.0)
+			speed: 100.0)
 		trainAction = SKAction.repeatForever(trainAction)
 		myTrain.run(trainAction, withKey: "myKey")
 		
 	}
 	
+	var isFacingRight: Bool = true
 	override func update(_ currentTime: TimeInterval) {
-		// Called before each frame is rendered
+		let p = myTrain.position
+		if p.y < trainPath.bounds.midY &&
+			isFacingRight
+		{
+			isFacingRight = false
+			myTrain.texture = txLeft
+			
+		}
+		else 
+		if p.y > trainPath.bounds.midY &&
+			!isFacingRight
+		{
+			isFacingRight = true
+			myTrain.texture = txRight
+			
+		}
+
 	}
+//	override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
+//		print(trainPath.bounds)
+//		isFacingRight.toggle()
+//		print("r?", isFacingRight, isFacingRight ? "txLeft" : "txRight")
+//		myTrain.texture = isFacingRight ? txRight : txLeft
+//	}
 }

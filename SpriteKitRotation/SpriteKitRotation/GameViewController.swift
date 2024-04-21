@@ -11,30 +11,68 @@ import GameplayKit
 
 class GameViewController: UIViewController {
 	
-	var scene: SKScene!
-
+	var trainScene: TrainGameScene!
+	var directionsScene: DirectionsScene!
+	var creditsScene: CreditsScene!
+	
 	override func viewDidLoad() {
 		super.viewDidLoad()
 		
-		// GameScene class uses a simple oval path,
-		//	so any time the frame/path is updated, the
-		//	animation will restart at the Zero-degree point
-		//scene = GameScene(size: view.frame.size)
-
-		// AdvGameScene class uses a custom MyEllipse class
-		//	to generate an array of points forming an ellipse
-		// When the frame/path is updated, we get the
-		//	closest point on the current ellipse path, and
-		//	re-generate the path so animation starts at that point
-		scene = AdvGameScene(size: view.frame.size)
-
-		scene.scaleMode = .resizeFill
-		if let skView = view as? SKView {
-			skView.presentScene(scene)
+		trainScene = TrainGameScene(size: view.frame.size)
+		directionsScene = DirectionsScene(size: view.frame.size)
+		creditsScene = CreditsScene(size: view.frame.size)
+		
+		trainScene.setupScene(size: view.frame.size)
+		trainScene.showCallback = { [weak self] i in
+			guard let self = self else { return }
+			if i == 1 {
+				self.showDirectionsScene()
+			} else {
+				self.showCreditsScene()
+			}
+			
 		}
-
+		
+		directionsScene.setupScene(size: view.frame.size)
+		directionsScene.backCallback = { [weak self] in
+			guard let self = self else { return }
+			self.showTrainScene()
+			
+		}
+		
+		creditsScene.setupScene(size: view.frame.size)
+		creditsScene.backCallback = { [weak self] in
+			guard let self = self else { return }
+			self.showTrainScene()
+		}
+		
+		trainScene.scaleMode = .resizeFill
+		directionsScene.scaleMode = .resizeFill
+		creditsScene.scaleMode = .resizeFill
+		
+		// start with trainScene
+		if let skView = view as? SKView {
+			skView.presentScene(trainScene)
+		}
+		
 	}
-
+	
+	func showTrainScene() {
+		guard let skView = view as? SKView else { return }
+		let reveal = SKTransition.moveIn(with: .left, duration: 0.3)
+		skView.presentScene(trainScene, transition: reveal)
+	}
+	func showDirectionsScene() {
+		guard let skView = view as? SKView else { return }
+		let reveal = SKTransition.moveIn(with: .right, duration: 0.3)
+		skView.presentScene(directionsScene, transition: reveal)
+	}
+	func showCreditsScene() {
+		guard let skView = view as? SKView else { return }
+		let reveal = SKTransition.moveIn(with: .right, duration: 0.3)
+		skView.presentScene(creditsScene, transition: reveal)
+	}
+	
 	override var supportedInterfaceOrientations: UIInterfaceOrientationMask {
 		return .all
 	}

@@ -15,6 +15,10 @@
 		FCB8106C2B82C128005A30C0 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = FCB8106A2B82C128005A30C0 /* LaunchScreen.storyboard */; };
 		FCB810732B837F19005A30C0 /* AdvGameScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCB810722B837F19005A30C0 /* AdvGameScene.swift */; };
 		FCB810752B837F45005A30C0 /* MyEllipse.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCB810742B837F45005A30C0 /* MyEllipse.swift */; };
+		FCC397502BD547C200DA43D0 /* DirectionsScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCC3974F2BD547C200DA43D0 /* DirectionsScene.swift */; };
+		FCC397522BD54C2900DA43D0 /* CreditsScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCC397512BD54C2900DA43D0 /* CreditsScene.swift */; };
+		FCC397542BD54D6C00DA43D0 /* TrainGameScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCC397532BD54D6B00DA43D0 /* TrainGameScene.swift */; };
+		FCF1EC7F2BB440E600EBD560 /* Simple.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCF1EC7E2BB440E600EBD560 /* Simple.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -27,6 +31,10 @@
 		FCB8106B2B82C128005A30C0 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		FCB810722B837F19005A30C0 /* AdvGameScene.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AdvGameScene.swift; sourceTree = "<group>"; };
 		FCB810742B837F45005A30C0 /* MyEllipse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyEllipse.swift; sourceTree = "<group>"; };
+		FCC3974F2BD547C200DA43D0 /* DirectionsScene.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DirectionsScene.swift; sourceTree = "<group>"; };
+		FCC397512BD54C2900DA43D0 /* CreditsScene.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreditsScene.swift; sourceTree = "<group>"; };
+		FCC397532BD54D6B00DA43D0 /* TrainGameScene.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TrainGameScene.swift; sourceTree = "<group>"; };
+		FCF1EC7E2BB440E600EBD560 /* Simple.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Simple.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -60,15 +68,27 @@
 			isa = PBXGroup;
 			children = (
 				FCB8105B2B82C126005A30C0 /* AppDelegate.swift */,
-				FCB810612B82C126005A30C0 /* GameScene.swift */,
-				FCB810722B837F19005A30C0 /* AdvGameScene.swift */,
-				FCB810742B837F45005A30C0 /* MyEllipse.swift */,
 				FCB810632B82C126005A30C0 /* GameViewController.swift */,
+				FCC397532BD54D6B00DA43D0 /* TrainGameScene.swift */,
+				FCC3974F2BD547C200DA43D0 /* DirectionsScene.swift */,
+				FCC397512BD54C2900DA43D0 /* CreditsScene.swift */,
+				FCB810742B837F45005A30C0 /* MyEllipse.swift */,
+				FCC397552BD5A3D500DA43D0 /* scratch */,
 				FCB810652B82C126005A30C0 /* Main.storyboard */,
 				FCB810682B82C128005A30C0 /* Assets.xcassets */,
 				FCB8106A2B82C128005A30C0 /* LaunchScreen.storyboard */,
 			);
 			path = SpriteKitRotation;
+			sourceTree = "<group>";
+		};
+		FCC397552BD5A3D500DA43D0 /* scratch */ = {
+			isa = PBXGroup;
+			children = (
+				FCB810612B82C126005A30C0 /* GameScene.swift */,
+				FCB810722B837F19005A30C0 /* AdvGameScene.swift */,
+				FCF1EC7E2BB440E600EBD560 /* Simple.swift */,
+			);
+			path = scratch;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -142,11 +162,15 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				FCC397502BD547C200DA43D0 /* DirectionsScene.swift in Sources */,
+				FCC397522BD54C2900DA43D0 /* CreditsScene.swift in Sources */,
 				FCB810752B837F45005A30C0 /* MyEllipse.swift in Sources */,
+				FCC397542BD54D6C00DA43D0 /* TrainGameScene.swift in Sources */,
 				FCB810732B837F19005A30C0 /* AdvGameScene.swift in Sources */,
 				FCB810622B82C126005A30C0 /* GameScene.swift in Sources */,
 				FCB810642B82C126005A30C0 /* GameViewController.swift in Sources */,
 				FCB8105C2B82C126005A30C0 /* AppDelegate.swift in Sources */,
+				FCF1EC7F2BB440E600EBD560 /* Simple.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

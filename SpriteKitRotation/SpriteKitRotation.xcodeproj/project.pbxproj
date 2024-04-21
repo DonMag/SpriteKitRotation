@@ -18,6 +18,7 @@
 		FCC397502BD547C200DA43D0 /* DirectionsScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCC3974F2BD547C200DA43D0 /* DirectionsScene.swift */; };
 		FCC397522BD54C2900DA43D0 /* CreditsScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCC397512BD54C2900DA43D0 /* CreditsScene.swift */; };
 		FCC397542BD54D6C00DA43D0 /* TrainGameScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCC397532BD54D6B00DA43D0 /* TrainGameScene.swift */; };
+		FCC397572BD5AAC900DA43D0 /* Utilities.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCC397562BD5AAC900DA43D0 /* Utilities.swift */; };
 		FCF1EC7F2BB440E600EBD560 /* Simple.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCF1EC7E2BB440E600EBD560 /* Simple.swift */; };
 /* End PBXBuildFile section */
 
@@ -34,6 +35,7 @@
 		FCC3974F2BD547C200DA43D0 /* DirectionsScene.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DirectionsScene.swift; sourceTree = "<group>"; };
 		FCC397512BD54C2900DA43D0 /* CreditsScene.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreditsScene.swift; sourceTree = "<group>"; };
 		FCC397532BD54D6B00DA43D0 /* TrainGameScene.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TrainGameScene.swift; sourceTree = "<group>"; };
+		FCC397562BD5AAC900DA43D0 /* Utilities.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Utilities.swift; sourceTree = "<group>"; };
 		FCF1EC7E2BB440E600EBD560 /* Simple.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Simple.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -73,6 +75,7 @@
 				FCC3974F2BD547C200DA43D0 /* DirectionsScene.swift */,
 				FCC397512BD54C2900DA43D0 /* CreditsScene.swift */,
 				FCB810742B837F45005A30C0 /* MyEllipse.swift */,
+				FCC397562BD5AAC900DA43D0 /* Utilities.swift */,
 				FCC397552BD5A3D500DA43D0 /* scratch */,
 				FCB810652B82C126005A30C0 /* Main.storyboard */,
 				FCB810682B82C128005A30C0 /* Assets.xcassets */,
@@ -170,6 +173,7 @@
 				FCB810622B82C126005A30C0 /* GameScene.swift in Sources */,
 				FCB810642B82C126005A30C0 /* GameViewController.swift in Sources */,
 				FCB8105C2B82C126005A30C0 /* AppDelegate.swift in Sources */,
+				FCC397572BD5AAC900DA43D0 /* Utilities.swift in Sources */,
 				FCF1EC7F2BB440E600EBD560 /* Simple.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

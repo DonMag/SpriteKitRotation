@@ -123,7 +123,7 @@ class TrainGameScene: SKScene {
 		ellipseLandscape.generatePoints(in: r, numberOfPoints: numEllipsePoints)
 		
 		// we want to start with the train near top-center of the oval
-		lastIDX = ellipseLandscape.closestIndex(to: .init(x: rectP.midX - (myTrain.size.width * 0.75), y: rectP.maxY)) ?? 0
+		lastIDX = Int(Double(numEllipsePoints) * 0.25)
 
 		// add "tap" labels to show Directions or Credits scenes
 		directionsLabel = SKLabelNode(fontNamed: "MarkerFelt-Thin")

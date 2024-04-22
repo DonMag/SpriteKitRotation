@@ -18,11 +18,13 @@ class GameViewController: UIViewController {
 	override func viewDidLoad() {
 		super.viewDidLoad()
 		
+		// dark green background
+		view.backgroundColor = UIColor(red: 0.0, green: 0.4, blue: 0.0, alpha: 1.0)
+
 		trainScene = TrainGameScene(size: view.frame.size)
 		directionsScene = DirectionsScene(size: view.frame.size)
 		creditsScene = CreditsScene(size: view.frame.size)
 		
-		trainScene.setupScene(size: view.frame.size)
 		trainScene.showCallback = { [weak self] i in
 			guard let self = self else { return }
 			if i == 1 {
@@ -30,17 +32,13 @@ class GameViewController: UIViewController {
 			} else {
 				self.showCreditsScene()
 			}
-			
 		}
 		
-		directionsScene.setupScene(size: view.frame.size)
 		directionsScene.backCallback = { [weak self] in
 			guard let self = self else { return }
 			self.showTrainScene()
-			
 		}
 		
-		creditsScene.setupScene(size: view.frame.size)
 		creditsScene.backCallback = { [weak self] in
 			guard let self = self else { return }
 			self.showTrainScene()
@@ -49,12 +47,18 @@ class GameViewController: UIViewController {
 		trainScene.scaleMode = .resizeFill
 		directionsScene.scaleMode = .resizeFill
 		creditsScene.scaleMode = .resizeFill
-		
-		// start with trainScene
+
+	}
+
+	override func viewDidAppear(_ animated: Bool) {
+		super.viewDidAppear(animated)
+		// here we know the actual view size
+		trainScene.setupScene(size: view.frame.size)
+		directionsScene.setupScene(size: view.frame.size)
+		creditsScene.setupScene(size: view.frame.size)
 		if let skView = view as? SKView {
 			skView.presentScene(trainScene)
 		}
-		
 	}
 	
 	func showTrainScene() {

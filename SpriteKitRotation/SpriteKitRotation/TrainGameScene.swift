@@ -45,7 +45,7 @@ class TrainGameScene: SKScene {
 	
 	// number of points to use to define the oval/ellipse
 	//	works best as an even factor of 360 (degrees)
-	//	so, 360 or 180 or 120 or 90 etc...
+	//	360, 180, 120, 90, 72, 60, 45, 40, etc...
 	private let numEllipsePoints: Int = 180
 	
 	func setupScene(size: CGSize) {
@@ -53,14 +53,25 @@ class TrainGameScene: SKScene {
 		// dark green background
 		self.backgroundColor = UIColor(red: 0.0, green: 0.4, blue: 0.0, alpha: 1.0)
 		
-		// load the train image and
-		//	create a horizontallyMirrored copy
-		guard let imgTop = UIImage(named: "myTrain"),
+		// load the train image
+		//	our train image was drawn in this orientation:
+		//
+		//		┌┈┈┈┈┈┈┈┈┈┈┐
+		//		│          │
+		//      │          └┄┄┄┄╲
+		//      │               ╱
+		//		└┈┈┈┈┈┈┈┈┈┈┈┈┄┄╱
+		//
+		// so, we need to create
+		//	a rotated copy and (for top-of-oval), and
+		//	a horizontallyMirrored copy (for bottom-of-oval)
+		guard let img = UIImage(named: "myTrain"),
+			  let imgTop = img.rotated(byDegrees: -90.0),
 			  let imgBottom = imgTop.horizontallyMirrored()
 		else {
 			fatalError("Could not load \"myTrain\" image!")
 		}
-		
+
 		txTop = SKTexture(image: imgTop)
 		txBottom = SKTexture(image: imgBottom)
 
@@ -214,8 +225,8 @@ class TrainGameScene: SKScene {
 			trainPath = ellipseLandscape.generatePath(startingAt: lastIDX).reversing()
 
 			// re-position the top labels
-			directionsLabel.position = .init(x: myRect.minX + (directionsLabel.frame.width * 0.5) + 16.0, y: myRect.maxY - 40.0)
-			creditsLabel.position = .init(x: myRect.maxX - ((directionsLabel.frame.width * 0.5) + 16.0), y: myRect.maxY - 40.0)
+			directionsLabel.position = .init(x: myRect.minX + (directionsLabel.frame.width * 0.5) + 32.0, y: myRect.maxY - 40.0)
+			creditsLabel.position = .init(x: myRect.maxX - ((creditsLabel.frame.width * 0.5) + 32.0), y: myRect.maxY - 40.0)
 			
 		} else {
 			
@@ -224,7 +235,7 @@ class TrainGameScene: SKScene {
 
 			// re-position the top labels
 			directionsLabel.position = .init(x: myRect.minX + (directionsLabel.frame.width * 0.5) + 16.0, y: myRect.maxY - 80.0)
-			creditsLabel.position = .init(x: myRect.maxX - ((directionsLabel.frame.width * 0.5) + 16.0), y: myRect.maxY - 80.0)
+			creditsLabel.position = .init(x: myRect.maxX - ((creditsLabel.frame.width * 0.5) + 16.0), y: myRect.maxY - 80.0)
 
 		}
 		
@@ -239,7 +250,7 @@ class TrainGameScene: SKScene {
 			trainPath.cgPath,
 			asOffset: false,
 			orientToPath: true,
-			speed: 50.0)
+			speed: 150.0)
 		trainAction = SKAction.repeatForever(trainAction)
 		myTrain.run(trainAction, withKey: "myKey")
 		myTrain.isPaused = false

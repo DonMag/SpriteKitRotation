@@ -37,6 +37,8 @@ class TrainGameScene: SKScene {
 	//	when on Bottom of oval
 	private var txTop: SKTexture!
 	private var txBottom: SKTexture!
+	private var txRight: SKTexture!
+	private var txLeft: SKTexture!
 	private var isOnTopOfOval: Bool = true
 	
 	// track the index of the point on the array
@@ -67,13 +69,18 @@ class TrainGameScene: SKScene {
 		//	a horizontallyMirrored copy (for bottom-of-oval)
 		guard let img = UIImage(named: "myTrain"),
 			  let imgTop = img.rotated(byDegrees: -90.0),
-			  let imgBottom = imgTop.horizontallyMirrored()
+			  let imgBottom = imgTop.horizontallyMirrored(),
+			  let imgO = UIImage(named: "myTrainOver"),
+			  let imgRight = imgO.rotated(byDegrees: -90.0),
+			  let imgLeft = imgRight.horizontallyMirrored()
 		else {
 			fatalError("Could not load \"myTrain\" image!")
 		}
 
 		txTop = SKTexture(image: imgTop)
 		txBottom = SKTexture(image: imgBottom)
+		txRight = SKTexture(image: imgRight)
+		txLeft = SKTexture(image: imgLeft)
 
 		// oval shape node is only being used here
 		//	because we do not have a "tracks" image yet
@@ -250,29 +257,58 @@ class TrainGameScene: SKScene {
 			trainPath.cgPath,
 			asOffset: false,
 			orientToPath: true,
-			speed: 150.0)
+			speed: 75.0)
 		trainAction = SKAction.repeatForever(trainAction)
 		myTrain.run(trainAction, withKey: "myKey")
 		myTrain.isPaused = false
 	}
-	
+
+	var txIDX: Int = 0
 	// Called before each frame is rendered
 	override func update(_ currentTime: TimeInterval) {
 		// we want to swap the train image if the animation
 		//	has moved from top-half to bottom-half of ellipse
 		//	and vice-versa
 		let p = myTrain.position
-		if p.y < trainPath.bounds.midY && isOnTopOfOval
-		{
-			isOnTopOfOval = false
-			myTrain.texture = txBottom
+		let r = trainPath.bounds
+		let t = r.height * 0.2
+		
+		if abs(p.y - r.midY) < t {
+			if p.x > r.midX {
+				if txIDX != 1 {
+					txIDX = 1
+					myTrain.texture = txRight
+				}
+			} else {
+				if txIDX != 3 {
+					txIDX = 3
+					myTrain.texture = txLeft
+				}
+			}
+		} else {
+			if p.y > trainPath.bounds.midY && txIDX != 0 {
+				txIDX = 0
+				myTrain.texture = txTop
+			} else if p.y < trainPath.bounds.midY && txIDX != 2 {
+				txIDX = 2
+				myTrain.texture = txBottom
+			}
 		}
-		else
-		if p.y > trainPath.bounds.midY && !isOnTopOfOval
-		{
-			isOnTopOfOval = true
-			myTrain.texture = txTop
-		}
+
+// original animation - no overhead image(s)
+//		let p = myTrain.position
+//		if p.y < trainPath.bounds.midY && isOnTopOfOval
+//		{
+//			isOnTopOfOval = false
+//			myTrain.texture = txBottom
+//		}
+//		else
+//		if p.y > trainPath.bounds.midY && !isOnTopOfOval
+//		{
+//			isOnTopOfOval = true
+//			myTrain.texture = txTop
+//		}
+
 	}
 
 	// if we tap the Directions or Credits label

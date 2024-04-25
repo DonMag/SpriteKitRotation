@@ -17,9 +17,13 @@ class GameViewController: UIViewController {
 	
 	override func viewDidLoad() {
 		super.viewDidLoad()
-		
+				
 		// dark green background
 		view.backgroundColor = UIColor(red: 0.0, green: 0.4, blue: 0.0, alpha: 1.0)
+		
+		if let v = view.subviews.first {
+			v.removeFromSuperview()
+		}
 
 		trainScene = TrainGameScene(size: view.frame.size)
 		directionsScene = DirectionsScene(size: view.frame.size)

@@ -58,11 +58,11 @@ class TrainGameScene: SKScene {
 		// load the train image
 		//	our train image was drawn in this orientation:
 		//
-		//		┌┈┈┈┈┈┈┈┈┈┈┐
-		//		│          │
+		//      ┌┈┈┈┈┈┈┈┈┈┈┐
+		//      │          │
 		//      │          └┄┄┄┄╲
 		//      │               ╱
-		//		└┈┈┈┈┈┈┈┈┈┈┈┈┄┄╱
+		//      └┈┈◯┈┈┈┈┈┈◯◯┈┄┄╱
 		//
 		// so, we need to create
 		//	a rotated copy and (for top-of-oval), and

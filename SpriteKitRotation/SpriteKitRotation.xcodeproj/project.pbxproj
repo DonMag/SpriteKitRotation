@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		F8C8775F2BE6641500B856BC /* TrainTwoGameScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8C8775E2BE6641500B856BC /* TrainTwoGameScene.swift */; };
 		FCB8105C2B82C126005A30C0 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCB8105B2B82C126005A30C0 /* AppDelegate.swift */; };
 		FCB810622B82C126005A30C0 /* GameScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCB810612B82C126005A30C0 /* GameScene.swift */; };
 		FCB810642B82C126005A30C0 /* GameViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCB810632B82C126005A30C0 /* GameViewController.swift */; };
@@ -25,6 +26,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		F8C8775E2BE6641500B856BC /* TrainTwoGameScene.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TrainTwoGameScene.swift; sourceTree = "<group>"; };
 		FCB810582B82C126005A30C0 /* SpriteKitRotation.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SpriteKitRotation.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		FCB8105B2B82C126005A30C0 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		FCB810612B82C126005A30C0 /* GameScene.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameScene.swift; sourceTree = "<group>"; };
@@ -76,6 +78,7 @@
 				FCB8105B2B82C126005A30C0 /* AppDelegate.swift */,
 				FCB810632B82C126005A30C0 /* GameViewController.swift */,
 				FCC397532BD54D6B00DA43D0 /* TrainGameScene.swift */,
+				F8C8775E2BE6641500B856BC /* TrainTwoGameScene.swift */,
 				FCC3974F2BD547C200DA43D0 /* DirectionsScene.swift */,
 				FCC397512BD54C2900DA43D0 /* CreditsScene.swift */,
 				FCB810742B837F45005A30C0 /* MyEllipse.swift */,
@@ -188,6 +191,7 @@
 				FCB810642B82C126005A30C0 /* GameViewController.swift in Sources */,
 				FCC3975C2BDA753D00DA43D0 /* Test1Scene.swift in Sources */,
 				FCB8105C2B82C126005A30C0 /* AppDelegate.swift in Sources */,
+				F8C8775F2BE6641500B856BC /* TrainTwoGameScene.swift in Sources */,
 				FCC397572BD5AAC900DA43D0 /* Utilities.swift in Sources */,
 				FCC3975E2BDA780000DA43D0 /* TestViewController.swift in Sources */,
 				FCF1EC7F2BB440E600EBD560 /* Simple.swift in Sources */,

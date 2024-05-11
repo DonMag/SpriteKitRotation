@@ -12,6 +12,7 @@ import GameplayKit
 class GameViewController: UIViewController {
 	
 	var trainScene: TrainGameScene!
+	var trainTwoScene: TrainTwoGameScene!
 	var directionsScene: DirectionsScene!
 	var creditsScene: CreditsScene!
 	
@@ -26,10 +27,20 @@ class GameViewController: UIViewController {
 		}
 
 		trainScene = TrainGameScene(size: view.frame.size)
+		trainTwoScene = TrainTwoGameScene(size: view.frame.size)
 		directionsScene = DirectionsScene(size: view.frame.size)
 		creditsScene = CreditsScene(size: view.frame.size)
 		
 		trainScene.showCallback = { [weak self] i in
+			guard let self = self else { return }
+			if i == 1 {
+				self.showDirectionsScene()
+			} else {
+				self.showCreditsScene()
+			}
+		}
+		
+		trainTwoScene.showCallback = { [weak self] i in
 			guard let self = self else { return }
 			if i == 1 {
 				self.showDirectionsScene()
@@ -49,6 +60,7 @@ class GameViewController: UIViewController {
 		}
 		
 		trainScene.scaleMode = .resizeFill
+		trainTwoScene.scaleMode = .resizeFill
 		directionsScene.scaleMode = .resizeFill
 		creditsScene.scaleMode = .resizeFill
 
@@ -58,17 +70,17 @@ class GameViewController: UIViewController {
 		super.viewDidAppear(animated)
 		// here we know the actual view size
 		trainScene.setupScene(size: view.frame.size)
+		trainTwoScene.setupScene(size: view.frame.size)
 		directionsScene.setupScene(size: view.frame.size)
 		creditsScene.setupScene(size: view.frame.size)
-		if let skView = view as? SKView {
-			skView.presentScene(trainScene)
-		}
+		showTrainScene()
 	}
 	
 	func showTrainScene() {
 		guard let skView = view as? SKView else { return }
 		let reveal = SKTransition.moveIn(with: .left, duration: 0.3)
-		skView.presentScene(trainScene, transition: reveal)
+		//skView.presentScene(trainScene, transition: reveal)
+		skView.presentScene(trainTwoScene, transition: reveal)
 	}
 	func showDirectionsScene() {
 		guard let skView = view as? SKView else { return }

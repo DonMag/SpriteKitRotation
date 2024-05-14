@@ -19,7 +19,7 @@ class TestViewController: UIViewController {
 			v.removeFromSuperview()
 		}
 		
-		let testScene = Test1Scene(size: view.frame.size)
+		let testScene = Test2Scene(size: view.frame.size)
 		if let skView = view as? SKView {
 			skView.presentScene(testScene)
 			return

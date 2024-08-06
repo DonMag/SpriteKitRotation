@@ -127,9 +127,9 @@ class TrainTwoGameScene: SKScene {
 		}
 		myTrainCar.size = myTrain.size
 		
-		addChild(myTrain)
 		addChild(myTrainCar)
-		
+		addChild(myTrain)
+
 		// setup "portrait" and "landscape" ellipses
 		
 		var sz: CGSize!
@@ -172,7 +172,7 @@ class TrainTwoGameScene: SKScene {
 		
 		// we want to start with the train near top-center of the oval
 		lastIDX = Int(Double(numEllipsePoints) * 0.25)
-		lastCarIDX = lastIDX + 5
+		lastCarIDX = lastIDX + 10
 		
 		// add "tap" labels to show Directions or Credits scenes
 		directionsLabel = SKLabelNode(fontNamed: "MarkerFelt-Thin")
@@ -186,6 +186,7 @@ class TrainTwoGameScene: SKScene {
 		creditsLabel.fontSize = 32
 		creditsLabel.fontColor = SKColor.yellow
 		addChild(creditsLabel)
+		
 	}
 	
 	// this will be called on initial appearance, and
@@ -194,7 +195,8 @@ class TrainTwoGameScene: SKScene {
 		// update the framing based on "landscape" or "portrait" format
 		updateFraming()
 		// start the animation
-		startAnim()
+		setupAnim()
+//		startAnim()
 	}
 	
 	// this will be called when "going to" another scene
@@ -292,7 +294,35 @@ class TrainTwoGameScene: SKScene {
 		
 		//trainCarPath.apply(CGAffineTransform(translationX: 20.0, y: 180.0))
 	}
-	
+
+	func setupAnim() {
+		
+//		var trainAction = SKAction.follow(
+//			trainPath.cgPath,
+//			asOffset: false,
+//			orientToPath: true,
+//			speed: 0.0)
+//
+//		myTrain.run(trainAction, withKey: "myKeySetup")
+
+		var trainAction = SKAction.follow(
+			trainPath.cgPath,
+			asOffset: false,
+			orientToPath: true,
+			speed: 0.0)
+		
+		var trainActionCar = SKAction.follow(
+			trainCarPath.cgPath,
+			asOffset: false,
+			orientToPath: true,
+			speed: 0.0)
+		
+		myTrain.run(trainAction, withKey: "myKeySetup")
+		myTrainCar.run(trainActionCar, withKey: "myKeyCarSetup")
+		myTrain.isPaused = false
+		myTrainCar.isPaused = false
+	}
+
 	func startAnim() {
 		var trainAction = SKAction.follow(
 			trainPath.cgPath,
@@ -406,8 +436,18 @@ class TrainTwoGameScene: SKScene {
 			showCallback?(2)
 			return
 		}
-		myTrain.isPaused.toggle()
-		myTrainCar.isPaused.toggle()
+		
+		if let a = myTrain.action(forKey: "myKeySetup") {
+			myTrain.removeAllActions()
+			myTrainCar.removeAllActions()
+		}
+
+		if !myTrain.hasActions() {
+			startAnim()
+		} else {
+			myTrain.isPaused.toggle()
+			myTrainCar.isPaused.toggle()
+		}
 	}
 	
 	// debugging only

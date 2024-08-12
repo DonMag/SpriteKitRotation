@@ -17,13 +17,19 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="wR8-lv-3VW">
-                                <rect key="frame" x="60" y="119.00000000000001" width="273" height="149.33333333333337"/>
+                                <rect key="frame" x="60" y="118.99999999999997" width="273" height="494.33333333333326"/>
                                 <string key="text">GameViewController
 
 Set this as
 Initial View Controller
-for "Train" oval animation.</string>
-                                <fontDescription key="fontDescription" type="system" pointSize="25"/>
+for "Train" oval animation.
+
+Code is currently set to load TrainTwoGameScene: oval with Train and TrainCar.
+
+Scene will begin with train positioned at top of oval with correct orientation.
+
+Tap anywhere to run/pause/resume the animation.</string>
+                                <fontDescription key="fontDescription" type="system" pointSize="23"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>

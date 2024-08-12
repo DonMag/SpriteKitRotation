@@ -194,9 +194,9 @@ class TrainTwoGameScene: SKScene {
 	override func didMove(to view: SKView) {
 		// update the framing based on "landscape" or "portrait" format
 		updateFraming()
-		// start the animation
+		
+		// position sprites at start of animation
 		setupAnim()
-//		startAnim()
 	}
 	
 	// this will be called when "going to" another scene
@@ -297,21 +297,13 @@ class TrainTwoGameScene: SKScene {
 
 	func setupAnim() {
 		
-//		var trainAction = SKAction.follow(
-//			trainPath.cgPath,
-//			asOffset: false,
-//			orientToPath: true,
-//			speed: 0.0)
-//
-//		myTrain.run(trainAction, withKey: "myKeySetup")
-
-		var trainAction = SKAction.follow(
+		let trainAction = SKAction.follow(
 			trainPath.cgPath,
 			asOffset: false,
 			orientToPath: true,
 			speed: 0.0)
 		
-		var trainActionCar = SKAction.follow(
+		let trainActionCar = SKAction.follow(
 			trainCarPath.cgPath,
 			asOffset: false,
 			orientToPath: true,
@@ -351,9 +343,9 @@ class TrainTwoGameScene: SKScene {
 		// we want to swap the train image if the animation
 		//	has moved from top-half to bottom-half of ellipse
 		//	and vice-versa
-		var p = myTrain.position
-		var r = trainPath.bounds
-		var t = r.height * 0.2
+		let p = myTrain.position
+		let r = trainPath.bounds
+		let t = r.height * 0.2
 		
 		if abs(p.y - r.midY) < t {
 			if p.x > r.midX {
@@ -380,49 +372,6 @@ class TrainTwoGameScene: SKScene {
 				myTrainCar.texture = txCarBottom
 			}
 		}
-		
-		return()
-		
-		p = myTrainCar.position
-		r = trainCarPath.bounds
-		t = r.height * 0.2
-		
-		if abs(p.y - r.midY) < t {
-			if p.x > r.midX {
-				if txCarIDX != 1 {
-					txCarIDX = 1
-					myTrainCar.texture = txCarRight
-				}
-			} else {
-				if txCarIDX != 3 {
-					txCarIDX = 3
-					myTrainCar.texture = txCarLeft
-				}
-			}
-		} else {
-			if p.y > trainCarPath.bounds.midY && txCarIDX != 0 {
-				txCarIDX = 0
-				myTrainCar.texture = txCarTop
-			} else if p.y < trainCarPath.bounds.midY && txCarIDX != 2 {
-				txCarIDX = 2
-				myTrainCar.texture = txCarBottom
-			}
-		}
-		
-		// original animation - no overhead image(s)
-		//		let p = myTrain.position
-		//		if p.y < trainPath.bounds.midY && isOnTopOfOval
-		//		{
-		//			isOnTopOfOval = false
-		//			myTrain.texture = txBottom
-		//		}
-		//		else
-		//		if p.y > trainPath.bounds.midY && !isOnTopOfOval
-		//		{
-		//			isOnTopOfOval = true
-		//			myTrain.texture = txTop
-		//		}
-		
 	}
 	
 	// if we tap the Directions or Credits label
@@ -437,7 +386,7 @@ class TrainTwoGameScene: SKScene {
 			return
 		}
 		
-		if let a = myTrain.action(forKey: "myKeySetup") {
+		if myTrain.action(forKey: "myKeySetup") != nil {
 			myTrain.removeAllActions()
 			myTrainCar.removeAllActions()
 		}
